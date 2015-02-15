@@ -44,3 +44,10 @@ O modelo de dados é o utilizado no Cassandra, pois dentre os dois sistemas, é 
 recriar uma terceira fonte de modelagem, o programa foi feito lendo o modelo de dados definido no Cassandra.
 
  
+Ambiente
+--------
+
+O script foi desenvolvido e testado com as seguintes versões das ferramentas:
+
+	- ElasticSearch 1.4.3
+	- Apache Cassandra 2.0.12
