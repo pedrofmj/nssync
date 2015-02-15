@@ -36,6 +36,10 @@ O campo id é utilizado para ser a chave primária de todas as entidades e possu
 é utilizado este campo como id do objeto, sem atributo adicional para o id. No caso do cassandra, id é uma coluna, mas ambos 
 devem ter os mesmo valor para os objetos respectivos. O timestamp é uma marca de tempo (Data e Hora) que representa a última 
 modificação do dado. Isto é utilizado para controlar a sincronização.
+Supõe-se também que não são feitas inserções ou atualizações "no passado", ou seja, o timetamp utilizado nas inserções e 
+atualizações é exatamente o momento em que estas inserções ou atualizações estão sendo feitas.
+O sistema foi desenvolvido conforme o arquivo em anexo Desafio_Técnico_Simbiose_Sincronização_ElasticSearch_Cassandra.pdf,
+que se encontra nesta mesma pasta.
 
 
 Modelo de dados

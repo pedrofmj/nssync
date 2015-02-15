@@ -25,8 +25,8 @@ class NsSynchronizer:
 	defaultTimestampField = '';
 	count = 0;
 	timeline = datetime(1900,1,1,0,0,0);
-	es = Elasticsearch();
-	cluster = Cluster();
+	es = Elasticsearch([{"host": "localhost", "port": 9200}]);
+	cluster = Cluster(contact_points="127.0.0.1",port=9042);
 	encoder = json.JSONEncoder();
 	delay = 10;
 	
@@ -160,6 +160,7 @@ class NsSynchronizer:
 				elif isinstance(value,(float)):
 					valuesPart = valuesPart + "%f";
 				elif isinstance(value,(datetime,date)):
+					#value = datetime(value.year,value.month,value.day,value.hour,value.minute,value.second);
 					valuesPart = valuesPart + "'%s'";
 				elif isinstance(value,(str,unicode)):
 					valuesPart = valuesPart + "'%s'";
@@ -215,7 +216,7 @@ class NsSynchronizer:
 		timestampField = self.defaultTimestampField;
 		baseDateTime = self.timeline;
 		query = "SELECT * FROM %s WHERE %s > '%s' ALLOW FILTERING" % (type,timestampField,baseDateTime.isoformat());
-		print "==> ",query;
+		#print "==> ",query;
 		rows = session.execute(query);
 		for row in rows:
 			print "\t\t\t\t",row;
@@ -255,12 +256,11 @@ class NsSynchronizer:
 		hits = searchResultES['hits']['hits'];
 		#print json.dumps(hits, sort_keys = False, indent = 4);
 		for hit in hits:
-			print hit;
-		query = "SELECT * FROM %s.%s WHERE id = %s" % (indexName,type,hit['_id']);
-		rows = session.execute(query);
-		size = rows.__len__();
-		if size == 0:
-			self.CSinsertESobject(session,indexName,type,hit)
+			query = "SELECT * FROM %s.%s WHERE id = %s" % (indexName,type,hit['_id']);
+			rows = session.execute(query);
+			size = rows.__len__();
+			if size == 0:
+				self.CSinsertESobject(session,indexName,type,hit)
 		
 		# TODO What to do with new indexes/types?
 	
