@@ -27,3 +27,20 @@ A ferramenta utiliza as seguintes regras para executar a sincronização:
 	   do Cassandra
  
 
+Suposições e Restrições
+-----------------------
+
+Para que o sistema funcione, é necessário que o modelo de dados nas duas ferramentas sigam algumas regras.
+Os dados tem apenas 1 nível (sem árvores de objetos), e toda tabela/tipo tem um campo id e um campo timestamp.
+O campo id é utilizado para ser a chave primária de todas as entidades e possui o formato UUID. No caso do ElasticSearch,
+é utilizado este campo como id do objeto, sem atributo adicional para o id. No caso do cassandra, id é uma coluna, mas ambos 
+devem ter os mesmo valor para os objetos respectivos. O timestamp é uma marca de tempo (Data e Hora) que representa a última 
+modificação do dado. Isto é utilizado para controlar a sincronização.
+
+
+Modelo de dados
+----------------
+O modelo de dados é o utilizado no Cassandra, pois dentre os dois sistemas, é o que necessita de modelagem. Para não ter que 
+recriar uma terceira fonte de modelagem, o programa foi feito lendo o modelo de dados definido no Cassandra.
+
+ 
