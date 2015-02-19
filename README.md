@@ -55,3 +55,11 @@ O script foi desenvolvido e testado com as seguintes versões das ferramentas:
 
 	- ElasticSearch 1.4.3
 	- Apache Cassandra 2.0.12
+	
+Execução
+--------
+
+Para executar a ferramenta, necessário configurar os parâmetros de conexãop no script nssync.py, e executá-lo:
+
+python nssync.py
+
